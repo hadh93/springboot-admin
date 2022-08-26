@@ -12,10 +12,12 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
+dependencies{
+    implementation 'javax.persistence:javax.persistence-api:2.2'
     compileOnly 'mysql:mysql-connector-java'
     compileOnly  'org.projectlombok:lombok:1.18.20'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.7.3'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
