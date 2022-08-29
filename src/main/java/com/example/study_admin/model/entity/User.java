@@ -2,6 +2,7 @@ package com.example.study_admin.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 // 변수명에 Low camel case 사용
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity // == table
 public class User {
     @Id
