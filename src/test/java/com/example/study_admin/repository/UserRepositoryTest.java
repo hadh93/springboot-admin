@@ -4,7 +4,10 @@ import com.example.study_admin.StudyAdminApplicationTests;
 import com.example.study_admin.model.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.junit.jupiter.api.Assertions;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -25,8 +28,8 @@ public class UserRepositoryTest extends StudyAdminApplicationTests {
 
         // 테스트 유저 객체 user의 값을 지정해준다.
         // 이때 user.setId();는 생략한다. 이유: AI-AutoIncrement 이기 때문
-        user.setAccount("TestUser02");
-        user.setEmail("TestUser02@gmail.com");
+        user.setAccount("TestUser03");
+        user.setEmail("TestUser03@gmail.com");
         user.setPhoneNumber("010-2222-2222");
         user.setCreatedAt(LocalDateTime.now());
         user.setCreatedBy("Admin");
@@ -39,8 +42,7 @@ public class UserRepositoryTest extends StudyAdminApplicationTests {
 
     @Test
     public void read(){
-        Optional<User> user;
-        user = userRepository.findById(2L);
+        Optional<User> user = userRepository.findById(4L);
         user.ifPresent(selectUser ->{
             System.out.println("user: "+selectUser);
             System.out.println("user: "+selectUser.getEmail());
@@ -48,9 +50,9 @@ public class UserRepositoryTest extends StudyAdminApplicationTests {
     }
 
     @Test
+    @Transactional
     public void update(){
-        Optional<User> user;
-        user = userRepository.findById(2L);
+        Optional<User> user = userRepository.findById(4L);
         user.ifPresent(selectUser ->{
             selectUser.setAccount("PPPP");
             selectUser.setUpdatedAt(LocalDateTime.now());
@@ -60,7 +62,25 @@ public class UserRepositoryTest extends StudyAdminApplicationTests {
         });
     }
 
+    @Test
+    @Transactional
     public void delete() {
+        Optional<User> user = userRepository.findById(4L);
+
+        Assertions.assertTrue(user.isPresent()); // true가 나와야 정상
+
+        user.ifPresent(selectUser ->{
+            userRepository.delete(selectUser);
+        });
+        Optional<User> deletedUser = userRepository.findById(2L);
+
+        if(deletedUser.isPresent()){
+            System.out.println("데이터 존재: "+deletedUser.get());
+        } else{
+            System.out.println("데이터 삭제 완료, 데이터 없음.");
+        }
+
+        Assertions.assertFalse(deletedUser.isPresent()); // false가 나와야 정상
 
     }
 
