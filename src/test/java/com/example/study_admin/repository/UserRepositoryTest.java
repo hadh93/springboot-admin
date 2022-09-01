@@ -28,9 +28,9 @@ public class UserRepositoryTest extends StudyAdminApplicationTests {
 
         // 테스트 유저 객체 user의 값을 지정해준다.
         // 이때 user.setId();는 생략한다. 이유: AI-AutoIncrement 이기 때문
-        user.setAccount("TestUser03");
-        user.setEmail("TestUser03@gmail.com");
-        user.setPhoneNumber("010-2222-2222");
+        user.setAccount("TestUser01");
+        user.setEmail("TestUser01@gmail.com");
+        user.setPhoneNumber("010-1111-1111");
         user.setCreatedAt(LocalDateTime.now());
         user.setCreatedBy("Admin");
 
@@ -42,7 +42,7 @@ public class UserRepositoryTest extends StudyAdminApplicationTests {
 
     @Test
     public void read(){
-        Optional<User> user = userRepository.findById(4L);
+        Optional<User> user = userRepository.findById(1L);
         user.ifPresent(selectUser ->{
             System.out.println("user: "+selectUser);
             System.out.println("user: "+selectUser.getEmail());
@@ -52,7 +52,7 @@ public class UserRepositoryTest extends StudyAdminApplicationTests {
     @Test
     @Transactional
     public void update(){
-        Optional<User> user = userRepository.findById(4L);
+        Optional<User> user = userRepository.findById(1L);
         user.ifPresent(selectUser ->{
             selectUser.setAccount("PPPP");
             selectUser.setUpdatedAt(LocalDateTime.now());
@@ -65,14 +65,14 @@ public class UserRepositoryTest extends StudyAdminApplicationTests {
     @Test
     @Transactional
     public void delete() {
-        Optional<User> user = userRepository.findById(4L);
+        Optional<User> user = userRepository.findById(1L);
 
         Assertions.assertTrue(user.isPresent()); // true가 나와야 정상
 
         user.ifPresent(selectUser ->{
             userRepository.delete(selectUser);
         });
-        Optional<User> deletedUser = userRepository.findById(2L);
+        Optional<User> deletedUser = userRepository.findById(1L);
 
         if(deletedUser.isPresent()){
             System.out.println("데이터 존재: "+deletedUser.get());
