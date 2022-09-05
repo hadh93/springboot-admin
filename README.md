@@ -7,3 +7,6 @@ FASTCAMPUS Java Back-End Project 1: Admin
 >    <img src = "https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
 >    <img src = "https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white">
 > </p>
+
+- Dev log
+> 2022.9.4 - DB setup
