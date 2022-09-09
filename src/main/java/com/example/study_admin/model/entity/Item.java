@@ -28,6 +28,7 @@ public class Item {
     private String createdBy;
     private LocalDateTime updatedAt;
     private LocalDateTime updatedBy;
+    private Long partnerId; // Foreign Key (FK)
 
 /*    // 1:N
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "item")

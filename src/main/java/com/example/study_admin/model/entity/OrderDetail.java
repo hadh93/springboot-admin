@@ -27,6 +27,9 @@ public class OrderDetail {
     private LocalDateTime updatedAt;
     private LocalDateTime updatedBy;
 
+    private Long itemId; // FK
+    private Long orderGroupId; // FK
+
 
 /*    // N:1
     // 주의: OrderDetail의 입장에서 생각할 것!
