@@ -3,6 +3,7 @@ package com.example.study_admin.model.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity // == table
+@ToString(exclude = {"orderGroup"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +32,9 @@ public class User {
     private LocalDateTime updatedAt;
     private String updatedBy;
 
+    // 1:N
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user") // OrderGroup의 @ManyToOne 어노테이션의 변수명과 동일해야 함!
+    private List<OrderGroup> orderGroupList;
 /*
     // 1:N
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
