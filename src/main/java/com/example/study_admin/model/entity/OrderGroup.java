@@ -33,4 +33,6 @@ public class OrderGroup {
     private LocalDateTime updatedAt;
     private LocalDateTime updatedBy;
 
+    private Long userId; // FK
+
 }

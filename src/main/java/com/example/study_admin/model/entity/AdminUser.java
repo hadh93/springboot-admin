@@ -23,7 +23,7 @@ public class AdminUser {
     private String status;
     private String role;
     private LocalDateTime lastLoginAt;
-    private LocalDateTime passwordUpdatedAt;
+    private LocalDateTime passwordUpdateAt;
     private int loginFailCount;
     private LocalDateTime registeredAt;
     private LocalDateTime unregisteredAt;
