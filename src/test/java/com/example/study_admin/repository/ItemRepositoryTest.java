@@ -2,6 +2,7 @@ package com.example.study_admin.repository;
 
 import com.example.study_admin.StudyAdminApplicationTests;
 import com.example.study_admin.model.entity.Item;
+import com.example.study_admin.model.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class ItemRepositoryTest extends StudyAdminApplicationTests {
         item.setRegisteredAt(LocalDateTime.now());
         item.setCreatedAt(LocalDateTime.now());
         item.setCreatedBy("Partner01");
-        item.setPartnerId(1L);
+//        item.setPartnerId(1L);
 
         Item newItem = itemRepository.save(item);
         Assertions.assertNotNull(newItem);
