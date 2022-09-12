@@ -5,6 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.criterion.Order;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -16,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @ToString(exclude = {"user", "orderDetailList"})
+@EntityListeners(AuditingEntityListener.class)
 public class OrderGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,10 +35,15 @@ public class OrderGroup {
     private Integer totalQuantity;
     private LocalDateTime orderAt;
     private LocalDateTime arrivalDate;
+    // Auditor에 의해 자동 관리되는 속성들
+    @CreatedDate
     private LocalDateTime createdAt;
+    @CreatedBy
     private String createdBy;
+    @LastModifiedDate
     private LocalDateTime updatedAt;
-    private LocalDateTime updatedBy;
+    @LastModifiedBy
+    private String updatedBy;
 
     // OrderGroup N : 1 User
     @ManyToOne

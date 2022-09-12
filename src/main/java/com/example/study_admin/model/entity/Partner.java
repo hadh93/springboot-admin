@@ -4,6 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @ToString(exclude = {"itemList", "category"})
+@EntityListeners(AuditingEntityListener.class)
 public class Partner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +33,15 @@ public class Partner {
     private String ceoName;
     private LocalDateTime registeredAt;
     private LocalDateTime unregisteredAt;
+    // Auditor에 의해 자동 관리되는 속성들
+    @CreatedDate
     private LocalDateTime createdAt;
+    @CreatedBy
     private String createdBy;
+    @LastModifiedDate
     private LocalDateTime updatedAt;
-    private LocalDateTime updatedBy;
+    @LastModifiedBy
+    private String updatedBy;
     // Partner N : 1 Category
     @ManyToOne
     private Category category;

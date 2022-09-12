@@ -20,14 +20,13 @@ public class UserRepositoryTest extends StudyAdminApplicationTests {
 
     @Test
     public void create(){
-        String account = "Test01";
-        String password = "Test01";
+        String account = "Test02";
+        String password = "Test02";
         String status = "REGISTERED";
-        String email = "Test01@gmail.com";
-        String phoneNumber = "010-1111-2222";
+        String email = "Test02@gmail.com";
+        String phoneNumber = "010-2222-2222";
         LocalDateTime registeredAt = LocalDateTime.now();
-        LocalDateTime createdAt = LocalDateTime.now();
-        String createdBy = "AdminServer";
+
 
         User user = new User();
         user.setAccount(account);
@@ -36,8 +35,16 @@ public class UserRepositoryTest extends StudyAdminApplicationTests {
         user.setEmail(email);
         user.setPhoneNumber(phoneNumber);
         user.setRegisteredAt(registeredAt);
-        user.setCreatedAt(createdAt);
-        user.setCreatedBy(createdBy);
+
+        // @Builder 어노테이션을 사용하면, 일부 매개변수만 넣은 생성자를 만들 수 있다.
+        // 참고: @Accessors(chain = true) 도 유사한 패턴을 만들 수 있다.
+        /*User u = User.builder()
+                .account(account)
+                .password(password)
+                .status(status)
+                .email(email)
+                .build(); // phonenumber와 registeredat가 없다!*/
+
 
         User newUser = userRepository.save(user);
 
@@ -48,6 +55,16 @@ public class UserRepositoryTest extends StudyAdminApplicationTests {
     @Transactional
     public void read(){
         User user = userRepository.findFirstByPhoneNumberOrderByIdDesc("010-1111-2222");
+
+
+        // '체인' 패턴으로 객체 값 수정 시, 다음과 같은 코드 용례가 가능함.
+//        user
+//                .setEmail("")
+//                .setPhoneNumber("")
+//                .setStatus("");
+//
+//        User u = new User().setAccount().setEmail().setPassword();
+
         user.getOrderGroupList().stream().forEach(orderGroup -> {
             System.out.println("----------------주문묶음----------------");
             System.out.println("수령인: " + orderGroup.getRevName());
