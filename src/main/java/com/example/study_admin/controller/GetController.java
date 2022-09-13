@@ -1,6 +1,7 @@
 package com.example.study_admin.controller;
 
 import com.example.study_admin.model.SearchParam;
+import com.example.study_admin.model.network.Header;
 import jdk.nashorn.internal.ir.RuntimeNode;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,12 @@ public class GetController {
         System.out.println(searchParam.getEmail());
         System.out.println(searchParam.getPage());
         return searchParam;
+    }
+
+    @GetMapping("/header")
+    public Header getHeader(){
+        // {"resultCode": "OK"}
+        return Header.builder().resultCode("OK").description("OK").build();
     }
 
 }
