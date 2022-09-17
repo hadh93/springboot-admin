@@ -7,6 +7,8 @@ import com.example.study_admin.model.network.response.OrderGroupApiResponse;
 import com.example.study_admin.service.OrderGroupApiLogicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import lombok.extern.slf4j.Slf4j;
+
 
 @RestController
 @RequestMapping("/api/orderGroup")
@@ -24,7 +26,7 @@ public class OrderGroupApiController implements CrudInterface<OrderGroupApiReque
     @Override
     @GetMapping("{id}")
     public Header<OrderGroupApiResponse> read(@PathVariable Long id) {
-        return null;
+        return orderGroupApiLogicService.read(id);
     }
 
     @Override

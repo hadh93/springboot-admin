@@ -10,6 +10,8 @@ import com.example.study_admin.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class OrderGroupApiLogicService implements CrudInterface <OrderGroupApiRequest, OrderGroupApiResponse> {
 
@@ -42,7 +44,9 @@ public class OrderGroupApiLogicService implements CrudInterface <OrderGroupApiRe
 
     @Override
     public Header<OrderGroupApiResponse> read(Long id) {
-        return null;
+        return orderGroupRepository.findById(id)
+                .map(this::response)
+                .orElseGet( () -> Header.ERROR("데이터 없음") );
     }
 
     @Override
