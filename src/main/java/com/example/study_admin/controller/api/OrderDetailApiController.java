@@ -45,4 +45,5 @@ public class OrderDetailApiController implements CrudInterface<OrderDetailApiReq
     public Header delete(@PathVariable Long id) {
         return orderDetailApiLogicService.delete(id);
     }
+
 }
