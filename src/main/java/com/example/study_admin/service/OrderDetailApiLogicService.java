@@ -4,6 +4,7 @@ import com.example.study_admin.ifs.CrudInterface;
 import com.example.study_admin.model.entity.OrderDetail;
 import com.example.study_admin.model.network.Header;
 import com.example.study_admin.model.network.request.OrderDetailApiRequest;
+import com.example.study_admin.model.network.request.OrderGroupApiRequest;
 import com.example.study_admin.model.network.response.OrderDetailApiResponse;
 import com.example.study_admin.repository.ItemRepository;
 import com.example.study_admin.repository.OrderDetailRepository;
@@ -54,7 +55,21 @@ public class OrderDetailApiLogicService implements CrudInterface<OrderDetailApiR
 
     @Override
     public Header<OrderDetailApiResponse> update(Header<OrderDetailApiRequest> request) {
-        return null;
+        OrderDetailApiRequest body = request.getData();
+        return orderDetailRepository.findById(body.getId())
+                .map(orderDetail -> {
+                    orderDetail
+                            .setStatus(body.getStatus())
+                            .setArrivalDate(body.getArrivalDate())
+                            .setQuantity(body.getQuantity())
+                            .setTotalPrice(body.getTotalPrice())
+                            .setOrderGroup(orderGroupRepository.getReferenceById(body.getOrderGroupId()))
+                            .setItem(itemRepository.getReferenceById(body.getItemId()));
+                    return orderDetail;
+                })
+                .map(changedOrderDetail -> orderDetailRepository.save(changedOrderDetail))
+                .map(this::response)
+                .orElseGet( () -> Header.ERROR("데이터 없음"));
     }
 
     @Override
