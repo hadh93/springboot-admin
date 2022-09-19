@@ -23,5 +23,4 @@ public class OrderDetailApiRequest {
     private Long itemId; // FK
     private Long orderGroupId; // FK
 
-
 }

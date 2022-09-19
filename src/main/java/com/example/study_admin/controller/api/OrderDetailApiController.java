@@ -10,6 +10,10 @@ import com.example.study_admin.service.OrderDetailApiLogicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.sun.media.jfxmedia.logging.Logger;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("/api/orderDetail")
 public class OrderDetailApiController implements CrudInterface<OrderDetailApiRequest, OrderDetailApiResponse> {
@@ -25,8 +29,9 @@ public class OrderDetailApiController implements CrudInterface<OrderDetailApiReq
 
     @Override
     @GetMapping("{id}")
-    public Header<OrderDetailApiResponse> read(@PathVariable Long id) {
-        return null;
+    public Header<OrderDetailApiResponse> read(@PathVariable(name="id") Long id) {
+        log.info("read id : {}", id);
+        return orderDetailApiLogicService.read(id);
     }
 
     @Override

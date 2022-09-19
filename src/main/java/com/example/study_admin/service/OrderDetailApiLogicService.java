@@ -11,6 +11,8 @@ import com.example.study_admin.repository.OrderGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class OrderDetailApiLogicService implements CrudInterface<OrderDetailApiRequest, OrderDetailApiResponse> {
 
@@ -43,7 +45,11 @@ public class OrderDetailApiLogicService implements CrudInterface<OrderDetailApiR
 
     @Override
     public Header<OrderDetailApiResponse> read(Long id) {
-        return null;
+        Optional<OrderDetail> optional = orderDetailRepository.findById(id);
+        return optional.map(orderDetail -> response(orderDetail))
+                .orElseGet(
+                        () -> Header.ERROR("데이터 없음")
+                );
     }
 
     @Override
