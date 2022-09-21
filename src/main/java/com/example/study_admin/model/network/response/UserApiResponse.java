@@ -1,5 +1,6 @@
 package com.example.study_admin.model.network.response;
 
+import com.example.study_admin.model.enumclass.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +16,7 @@ public class UserApiResponse {
     private Long id;
     private String account;
     private String password; // 마스킹 되어 내려갈 예정
-    private String status;
+    private UserStatus status;
     private String email;
     private String phoneNumber;
     private LocalDateTime registeredAt;

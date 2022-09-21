@@ -1,5 +1,6 @@
 package com.example.study_admin.model.entity;
 
+import com.example.study_admin.model.enumclass.UserStatus;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;
@@ -28,7 +29,10 @@ public class User {
     //@Column(name="account")와 동일. 변수명과 동일하다면 표기가 필요하지 않다.
     private String account;
     private String password;
-    private String status;
+
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
+
     private String email;
     private String phoneNumber;
     private LocalDateTime registeredAt;
