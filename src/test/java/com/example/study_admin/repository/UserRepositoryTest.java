@@ -3,6 +3,7 @@ package com.example.study_admin.repository;
 import com.example.study_admin.StudyAdminApplicationTests;
 import com.example.study_admin.model.entity.Item;
 import com.example.study_admin.model.entity.User;
+import com.example.study_admin.model.enumclass.UserStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,7 +23,7 @@ public class UserRepositoryTest extends StudyAdminApplicationTests {
     public void create(){
         String account = "Test02";
         String password = "Test02";
-        String status = "REGISTERED";
+        UserStatus status = UserStatus.REGISTERED;
         String email = "Test02@gmail.com";
         String phoneNumber = "010-2222-2222";
         LocalDateTime registeredAt = LocalDateTime.now();
