@@ -7,6 +7,7 @@ import com.example.study_admin.model.entity.User;
 import com.example.study_admin.model.network.Header;
 import com.example.study_admin.model.network.request.UserApiRequest;
 import com.example.study_admin.model.network.response.UserApiResponse;
+import com.example.study_admin.model.network.response.UserOrderInfoApiResponse;
 import com.example.study_admin.service.UserApiLogicService;
 import com.sun.media.jfxmedia.logging.Logger;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,11 @@ public class UserApiController extends CrudController<UserApiRequest, UserApiRes
     public Header<List<UserApiResponse>> findAll(@PageableDefault(sort={"id"}, direction = Sort.Direction.ASC) Pageable pageable) {
         log.info("{}", pageable);
         return userApiLogicService.search(pageable);
+    }
+
+    @GetMapping("/{userId}/orderInfo")
+    public Header<UserOrderInfoApiResponse> orderInfo(@PathVariable Long userId){
+        return userApiLogicService.orderInfo(userId);
     }
 
 }

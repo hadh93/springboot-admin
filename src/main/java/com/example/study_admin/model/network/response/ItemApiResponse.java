@@ -25,4 +25,5 @@ public class ItemApiResponse {
     private LocalDateTime unregisteredAt;
 
     private Long partnerId;
+
 }
